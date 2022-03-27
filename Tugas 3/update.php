@@ -18,6 +18,8 @@
 
         $save = $data->execute($param);
         if($save) {
+            session_start();
+            $_SESSION['message'] = "Data berhasil diubah";
             header("Location: index.php");
         }
     }

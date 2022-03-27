@@ -19,6 +19,8 @@
         $data->execute($param);
         if($data) {
             header("Location: index.php");
+            session_start();
+            $_SESSION['message'] = "Data berhasil ditambahkan";
         }
     }
 ?>

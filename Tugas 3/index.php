@@ -1,9 +1,9 @@
-<?php  
-    include 'connect.php';
-    $sql = "SELECT * FROM mhs";
-    $data = $conn->prepare($sql);
-    $data->execute();
-    $datas = $data->fetchAll(PDO::FETCH_OBJ);
+<?php
+include 'connect.php';
+$sql = "SELECT * FROM mhs";
+$data = $conn->prepare($sql);
+$data->execute();
+$datas = $data->fetchAll(PDO::FETCH_OBJ);
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,6 +24,16 @@
 
 <body>
     <div class="container mt-5">
+        <div class="success">
+            <?php session_start() ?>
+            <?php if($_SESSION)  : ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo $_SESSION['message']; ?>
+            </div>
+            <?php session_destroy() ?>
+            <?php header("Refresh:2; url=index.php") ?>
+            <?php endif; ?>
+        </div>
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-10">
@@ -46,17 +56,17 @@
             </thead>
             <tbody>
                 <?php $no = 1; ?>
-                <?php foreach($datas as $data) : ?>
-                <tr>
-                    <td class="text-center"><?= $no++ ?></td>
-                    <td><?= $data->nim ?></td>
-                    <td><?= ucwords($data->nama) ?></td>
-                    <td><?= ucwords($data->alamat) ?></td>
-                    <td class="text-center">
-                        <a href="edit.php?id=<?= $data->nim?>" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
-                        <a href="delete.php?id=<?= $data->nim?>" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a>
-                    </td>
-                </tr>
+                <?php foreach ($datas as $data) : ?>
+                    <tr>
+                        <td class="text-center"><?= $no++ ?></td>
+                        <td><?= $data->nim ?></td>
+                        <td><?= ucwords($data->nama) ?></td>
+                        <td><?= ucwords($data->alamat) ?></td>
+                        <td class="text-center">
+                            <a href="edit.php?id=<?= $data->nim ?>" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
+                            <a href="delete.php?id=<?= $data->nim ?>" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
