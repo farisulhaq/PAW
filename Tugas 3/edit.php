@@ -1,25 +1,12 @@
 <?php 
 include('include/connect.php');
-if(isset($_POST['submit'])){
-    $nim = $_POST['nim'];
-    $nama = $_POST['nama'];
-    $alamat = $_POST['alamat'];
-    $sql = "INSERT INTO tbl_171 (nim, nama, alamat) VALUES (:nim, :nama, :alamat)";
-    $data = $conn->prepare($sql);
-    
-    $params = array(
-        ':nim' => $nim,
-        ':nama' => $nama,
-        ':alamat' => $alamat
-    );
-
-    $save = $data->execute($params);
-    if($save){
-        session_start();
-        $_SESSION['message'] = 'Data berhasil ditambahkan';
-        header('Location: index.php');
-    }
-}
+// ambil id yang akan di edit
+$id = $_GET['id'];
+// query data tbl_171 berdasarkan id yang dipilih
+$sql = "SELECT * FROM tbl_171 WHERE nim = :nim";
+$data = $conn->prepare($sql);
+$data->execute(array(':nim' => $id));
+$data = $data->fetch(PDO::FETCH_OBJ);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,21 +19,22 @@ if(isset($_POST['submit'])){
         <div class="content-wrapper">
             <section class="content">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Mahasiswa</h3>
+                    <h3 class="card-title">Edit Mahasiswa</h3>
                 </div>
-                <form action="" method="post">
+                <form action="update.php" method="post">
                     <div class="card-body">
+                        <input type="hidden" name="nimOld" value="<?= $data->nim ?>">
                         <div class="form-group">
                             <label for="nim">NIM</label>
-                            <input type="number" class="form-control" id="nim" name="nim" placeholder="nim">
+                            <input type="number" class="form-control" id="nim" name="nim" placeholder="nim" value="<?= $data->nim ?>">
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?= $data->nama ?>">
                         </div>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="alamat">
+                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="alamat" value="<?= $data->alamat ?>">
                         </div>
                     </div>
                     <div class="card-footer">
