@@ -54,35 +54,50 @@ $nama = "Ahmad Farisul Haq";
 $nim = "200411100171";
 print("Nama/NRP : $nama/$nim <br><br>");
 // Fungsi Hari
-function hari($ind) {
-    $hari = array(
-        1 => "Senin",
-        "Selasa",
-        "Rabu",
-        "Kamis",
-        "Jumat",
-        "Sabtu",
-        "Minggu"
-    );
-    return $hari[$ind];
+function hari($hari) {
+    if($hari == 1) {
+        return "Senin";
+    } else if($hari == 2) {
+        return "Selasa";
+    } else if($hari == 3) {
+        return "Rabu";
+    } else if($hari == 4) {
+        return "Kamis";
+    } else if($hari == 5) {
+        return "Jumat";
+    } else if($hari == 6) {
+        return "Sabtu";
+    } else {
+        return "Minggu";
+    } 
 };
 // Fungsi Bulan
-function bulan($ind) {
-    $bulan = array(
-        1 => "Januari",
-        "Februari",
-        "Maret",
-        "April",
-        "Mei",
-        "Juni",
-        "Juli",
-        "Agustus",
-        "September",
-        "Oktober",
-        "November",
-        "Desember"
-    );
-    return $bulan[$ind];
+function bulan($bulan) {
+    if($bulan == 1) {
+        return "Januari";
+    } else if($bulan == 2) {
+        return "Februari";
+    } else if($bulan == 3) {
+        return "Maret";
+    } else if($bulan == 4) {
+        return "April";
+    } else if($bulan == 5) {
+        return "Mei";
+    } else if($bulan == 6) {
+        return "Juni";
+    } else if($bulan == 7) {
+        return "Juli";
+    } else if($bulan == 8) {
+        return "Agustus";
+    } else if($bulan == 9) {
+        return "September";
+    } else if($bulan == 10) {
+        return "Oktober";
+    } else if($bulan == 11) {
+        return "November";
+    } else {
+        return "Desember";
+    }
 };
 print("Sekarang Hari " . hari(date("N")) . " : Tanggal " . date("j") . " " . bulan(date("n")) . " " . date("Y"));
 ?>
