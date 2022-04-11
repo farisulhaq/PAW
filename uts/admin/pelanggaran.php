@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = "Data Guru" ?>
+    <?php $title = "Form Pelanggaran" ?>
 <?php include('../template/head.inc') ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">

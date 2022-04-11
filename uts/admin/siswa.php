@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = "Data Guru" ?>
+<?php $title = "Data Siswa" ?>
 <?php include('../template/head.inc') ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-auto mr-auto">
                         <div class="card-body">
-                            <h3 class="">Data Guru</h3>
+                            <h3 class="">Data Siswa</h3>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -30,7 +30,7 @@
                                     <thead>
                                         <tr class="text-center">
                                             <th class="col-1">No</th>
-                                            <th class="col-2">NIP</th>
+                                            <th class="col-2">NIS</th>
                                             <th class="col-2">Nama</th>
                                             <th class="col-2">TTL</th>
                                             <th class="col-2">Jenis Kelamin</th>

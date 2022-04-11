@@ -29,27 +29,33 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./insert.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'insert.php') ? print 'active' : print '' ?>">
+                    <a href="./siswa.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'siswa.php') ? print 'active' : print '' ?>">
                         <i class="nav-icon bi bi-people-fill"></i>
                         <p>Siswa</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./insert.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'insert.php') ? print 'active' : print '' ?>">
+                    <a href="./waliKelas.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'waliKelas.php') ? print 'active' : print '' ?>">
                         <i class="nav-icon bi bi-person-workspace"></i>
                         <p>Wali Kelas</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./insert.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'insert.php') ? print 'active' : print '' ?>">
+                    <a href="./kasus.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'kasus.php') ? print 'active' : print '' ?>">
                         <i class="nav-icon bi bi-bookmark-star-fill"></i>
                         <p>Kasus</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./insert.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'insert.php') ? print 'active' : print '' ?>">
+                    <a href="./pelanggaran.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'pelanggaran.php') ? print 'active' : print '' ?>">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>Pelanggaran</p>
+                    </a>
+                </li>
+                <li class="nav-item text-center">
+                    <a href="./pelanggaran.php" class="nav-link">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <p>Logout</p>
                     </a>
                 </li>
             </ul>

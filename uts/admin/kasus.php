@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = "Data Guru" ?>
+<?php $title = "Daftar Kasus" ?>
 <?php include('../template/head.inc') ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-auto mr-auto">
                         <div class="card-body">
-                            <h3 class="">Data Guru</h3>
+                            <h3 class="">Daftar Kasus</h3>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -30,11 +30,9 @@
                                     <thead>
                                         <tr class="text-center">
                                             <th class="col-1">No</th>
-                                            <th class="col-2">NIP</th>
-                                            <th class="col-2">Nama</th>
-                                            <th class="col-2">TTL</th>
-                                            <th class="col-2">Jenis Kelamin</th>
-                                            <th class="col-2">No. HP</th>
+                                            <th class="col-2">Kode</th>
+                                            <th class="col-2">Nama Kasus</th>
+                                            <th class="col-2">Poin</th>
                                             <th class="col-1">Action</th>
                                         </tr>
                                     </thead>
@@ -44,8 +42,6 @@
                                             <td class="text-center">1000029293836</td>
                                             <td>Ahmad Farisul Haq</td>
                                             <td>Sumenep, 12 April 2002</td>
-                                            <td>Laki-Laki</td>
-                                            <td>081881735505</td>
                                             <td class="text-center">
                                                 <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
                                                 <a href="delete.php?id=" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a>

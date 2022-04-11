@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php $title = "Dashboard" ?>
 <?php include('../template/head.inc') ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -97,7 +98,7 @@
                                             <td>Ahmad Farisul Haq</td>
                                             <td>Telat Masuk</td>
                                             <td class="text-center">-</td>
-                                                <!-- <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
+                                            <!-- <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
                                                 <a href="delete.php?id=" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a> -->
                                         </tr>
                                     </tbody>

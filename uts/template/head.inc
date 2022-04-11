@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php print(end((explode('/', $_SERVER['SCRIPT_NAME'])))) ?></title>
+    <title><?= $title ?></title>
     <!-- icon bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- Google Font: Source Sans Pro -->
@@ -29,5 +29,3 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
-<?php $data = (explode('/', $_SERVER['SCRIPT_NAME'])) ?>
-<?php print_r(end((explode('/', $_SERVER['SCRIPT_NAME']))))?>
