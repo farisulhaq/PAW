@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Form Pelanggaran" ?>
-<?php include('../template/head.inc') ?>
+<?php include('../../../template/head.inc') ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <?php include('../template/navbar.inc') ?>
-        <?php include('../template/sidebar.inc') ?>
+        <?php include('../../../template/navbar.inc') ?>
+        <?php include('../../../template/sidebar.inc') ?>
         <div class="content-wrapper">
             <section class="content">
                 <div class="row">
@@ -48,7 +48,7 @@
             </section>
         </div>
         <!-- include footer -->
-        <?php include('../template/footer.inc') ?>
+        <?php include('../../../template/footer.inc') ?>
     </div>
     <!-- sweetAlert -->
     <?php if ($_SESSION) : ?>
