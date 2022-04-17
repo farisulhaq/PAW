@@ -23,19 +23,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/php/paw/uts/admin/guru.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'guru.php') ? print 'active' : print '' ?>">
+                    <a href="/php/paw/uts/admin/guru.php" class="nav-link <?php (in_array(end((explode('/', $_SERVER['SCRIPT_NAME']))), ['guru.php', 'createGuru.php', 'editGuru.php'])) ? print 'active' : print '' ?>">
                         <i class="nav-icon bi bi-person-fill"></i>
                         <p>Guru</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/php/paw/uts/admin/siswa.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'siswa.php') ? print 'active' : print '' ?>">
+                    <a href="/php/paw/uts/admin/siswa.php" class="nav-link <?php (in_array(end((explode('/', $_SERVER['SCRIPT_NAME']))), ['siswa.php', 'createSiswa.php', 'editSiswa.php'])) ? print 'active' : print '' ?>">
                         <i class="nav-icon bi bi-people-fill"></i>
                         <p>Siswa</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/php/paw/uts/admin/waliKelas.php" class="nav-link <?php (end((explode('/', $_SERVER['SCRIPT_NAME']))) == 'waliKelas.php') ? print 'active' : print '' ?>">
+                    <a href="/php/paw/uts/admin/waliKelas.php" class="nav-link <?php (in_array(end((explode('/', $_SERVER['SCRIPT_NAME']))), ['waliKelas.php', 'createWali.php'])) ? print 'active' : print '' ?>">
                         <i class="nav-icon bi bi-person-workspace"></i>
                         <p>Wali Kelas</p>
                     </a>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item text-center">
-                    <a href="/php/paw/uts/admin/pelanggaran.php" class="nav-link">
+                    <a href="/php/paw/uts/config/logout.php" class="nav-link">
                         <i class="bi bi-box-arrow-right"></i>
                         <p>Logout</p>
                     </a>

@@ -1,5 +1,7 @@
 <?php
 include($_SERVER["DOCUMENT_ROOT"] . '/php/paw/uts/config/connect.php');
+// cek auth
+require($_SERVER['DOCUMENT_ROOT'] . '/php/paw/uts/auth/auth.php');
 if (isset($_POST['submit'])) {
     // Ambil data dari form
     $kelas = htmlspecialchars($_POST['kelas']);
@@ -52,7 +54,7 @@ if (isset($_POST['submit'])) {
                             <select class="form-control" name="kelas">
                                 <option value="0"> --Pilih Siswa-- </option>
                                 <?php foreach ($siswaAll as $siswa) : ?>
-                                    <option value="<?= $siswa->siswa_id ?>"><?= $siswa->nama_siswa ?></option>
+                                    <option value="<?= $siswa->siswa_id ?>"><?= ucwords($siswa->nama_siswa) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -68,7 +70,7 @@ if (isset($_POST['submit'])) {
                             <select class="form-control" name="kasus">
                                 <option value="0"> --Pilih Kasus-- </option>
                                 <?php foreach ($kasusAll as $kasus) : ?>
-                                    <option value="<?= $kasus->kasus_id ?>"><?= $kasus->nama_kasus ?></option>
+                                    <option value="<?= $kasus->kasus_id ?>"><?= ucwords($kasus->nama_kasus) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -84,7 +86,7 @@ if (isset($_POST['submit'])) {
                             <select class="form-control" name="guru">
                                 <option value="0"> --Pilih Guru-- </option>
                                 <?php foreach ($guruAll as $guru) : ?>
-                                    <option value="<?= $guru->guru_id ?>"><?= $guru->nama_guru ?></option>
+                                    <option value="<?= $guru->guru_id ?>"><?= ucwords($guru->nama_guru) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

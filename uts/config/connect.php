@@ -11,5 +11,4 @@ try {
 } catch (PDOException $e) {
     echo "Koneksi Gagal : " . $e->getMessage();
 }
-session_start();
 ?>

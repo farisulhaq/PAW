@@ -1,5 +1,7 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/php/paw/uts/config/connect.php');
+// cek auth
+require($_SERVER['DOCUMENT_ROOT'] . '/php/paw/uts/auth/auth.php');
 // mengupdate data guru ke database
 if (isset($_POST['submit'])) {
     // Ambil data dari form
