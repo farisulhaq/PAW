@@ -126,8 +126,8 @@ $countKasus = $stmt->fetch(PDO::FETCH_OBJ);
                                             <tr>
                                                 <td class="text-center"><?= $no++ ?></td>
                                                 <td class="text-center"><?= $siswa->nis ?></td>
-                                                <td><?= $siswa->nama_siswa ?></td>
-                                                <td><?= $siswa->nama_kasus ?></td>
+                                                <td><?= ucwords($siswa->nama_siswa) ?></td>
+                                                <td><?= ucwords($siswa->nama_kasus) ?></td>
                                                 <td class="text-center"><?= $siswa->poin_kasus ?></td>
                                                 <!-- <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
                                                 <a href="delete.php?id=" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a> -->
