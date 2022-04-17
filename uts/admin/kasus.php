@@ -1,3 +1,6 @@
+<?php
+include($_SERVER["DOCUMENT_ROOT"] . '/php/paw/uts/config/connect.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Daftar Kasus" ?>
@@ -15,11 +18,11 @@
                             <h3 class="">Daftar Kasus</h3>
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <!-- <div class="col-auto">
                         <div class="card-body">
                             <a href="" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i> Tambah</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="card-body">
@@ -33,21 +36,29 @@
                                             <th class="col-2">Kode</th>
                                             <th class="col-2">Nama Kasus</th>
                                             <th class="col-2">Poin</th>
-                                            <th class="col-1">Action</th>
+                                            <!-- <th class="col-1">Action</th> -->
                                         </tr>
                                     </thead>
+                                    <?php
+                                    $sql = "SELECT * FROM kasus";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+                                    ?>
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">1000029293836</td>
-                                            <td>Ahmad Farisul Haq</td>
-                                            <td>Sumenep, 12 April 2002</td>
-                                            <td class="text-center">
+                                        <?php $no = 1;
+                                        foreach ($result as $row) : ?>
+                                            <tr class="text-center">
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $row->kasus_id ?></td>
+                                                <td><?= $row->nama_kasus ?></td>
+                                                <td><?= $row->poin_kasus ?></td>
+                                                <!-- <td class="text-center">
                                                 <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
                                                 <a href="delete.php?id=" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a>
-                                            </td>
-                                            </td>
-                                        </tr>
+                                            </td> -->
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -60,7 +71,7 @@
         <?php include('../template/footer.inc') ?>
     </div>
     <!-- sweetAlert -->
-    <?php if ($_SESSION) : ?>
+    <?php if (isset($_SESSION['message'])) : ?>
         <script>
             Swal.fire({
                 icon: 'success',

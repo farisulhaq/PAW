@@ -1,3 +1,24 @@
+<?php
+include($_SERVER["DOCUMENT_ROOT"] . '/php/paw/uts/config/connect.php');
+if (isset($_POST['submit'])) {
+    // Ambil data dari form
+    $kelas = htmlspecialchars($_POST['kelas']);
+    $kasus = htmlspecialchars($_POST['kasus']);
+    $guru = htmlspecialchars($_POST['guru']);
+    $sql = "INSERT INTO trx_kasus (guru_id, kasus_id, siswa_id) VALUES (:guru, :kasus, :siswa)";
+    $stmt = $conn->prepare($sql);
+    $params = array(
+        ':guru' => $guru,
+        ':kasus' => $kasus,
+        ':siswa' => $kelas
+    );
+    $save = $stmt->execute($params);
+    if ($save) {
+        $_SESSION['message'] = 'Data pelanggaran berhasil ditambahkan';
+        header('Location: index.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Form Pelanggaran" ?>
@@ -17,32 +38,61 @@
                     </div>
                 </div>
                 <!-- form start -->
-                <form>
+                <form action="" method="post">
                     <div class="card-body">
-                        <!-- select -->
+                        <!-- select siswa -->
+                        <?php
+                        $sql = "SELECT * FROM siswa";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $siswaAll = $stmt->fetchAll(PDO::FETCH_OBJ);
+                        ?>
                         <div class="form-group">
-                            <label>Kelas</label>
-                            <select class="form-control">
-                                <option>option 1</option>
+                            <label>Nama</label>
+                            <select class="form-control" name="kelas">
+                                <option value="0"> --Pilih Siswa-- </option>
+                                <?php foreach ($siswaAll as $siswa) : ?>
+                                    <option value="<?= $siswa->siswa_id ?>"><?= $siswa->nama_siswa ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
+                        <!-- select kasus -->
+                        <?php
+                        $sql = "SELECT * FROM kasus";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $kasusAll = $stmt->fetchAll(PDO::FETCH_OBJ);
+                        ?>
                         <div class="form-group">
                             <label>Kasus</label>
-                            <select class="form-control">
-                                <option>option 1</option>
+                            <select class="form-control" name="kasus">
+                                <option value="0"> --Pilih Kasus-- </option>
+                                <?php foreach ($kasusAll as $kasus) : ?>
+                                    <option value="<?= $kasus->kasus_id ?>"><?= $kasus->nama_kasus ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
+                        <!-- select guru -->
+                        <?php
+                        $sql = "SELECT * FROM guru";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $guruAll = $stmt->fetchAll(PDO::FETCH_OBJ);
+                        ?>
                         <div class="form-group">
                             <label>Guru</label>
-                            <select class="form-control">
-                                <option>option 1</option>
+                            <select class="form-control" name="guru">
+                                <option value="0"> --Pilih Guru-- </option>
+                                <?php foreach ($guruAll as $guru) : ?>
+                                    <option value="<?= $guru->guru_id ?>"><?= $guru->nama_guru ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                     </div>
                 </form>
             </section>
@@ -50,19 +100,6 @@
         <!-- include footer -->
         <?php include('../template/footer.inc') ?>
     </div>
-    <!-- sweetAlert -->
-    <?php if ($_SESSION) : ?>
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: "<?= $_SESSION['message'] ?>",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        <?php unset($_SESSION['message']) ?>
-    <?php endif ?>
-    <!-- end sweetAlert -->
 </body>
 
 </html>

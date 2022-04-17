@@ -1,3 +1,26 @@
+<?php
+include($_SERVER["DOCUMENT_ROOT"] . '/php/paw/uts/config/connect.php');
+// count guru
+$sql = "SELECT COUNT(*) AS jumlah FROM guru";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$countGuru = $stmt->fetch(PDO::FETCH_OBJ);
+// count siswa
+$sql = "SELECT COUNT(*) AS jumlah FROM siswa";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$countSiswa = $stmt->fetch(PDO::FETCH_OBJ);
+// count kelas
+$sql = "SELECT COUNT(*) AS jumlah FROM kelas";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$countKelas = $stmt->fetch(PDO::FETCH_OBJ);
+// count kasus  
+$sql = "SELECT COUNT(*) AS jumlah FROM kasus";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$countKasus = $stmt->fetch(PDO::FETCH_OBJ);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Dashboard" ?>
@@ -19,14 +42,13 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>150</h3>
-
-                                        <p>New Orders</p>
+                                        <h3><?= $countGuru->jumlah ?></h3>
+                                        <p>Guru</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="guru.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -34,14 +56,13 @@
                                 <!-- small box -->
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                        <p>Bounce Rate</p>
+                                        <h3><?= $countSiswa->jumlah ?></h3>
+                                        <p>Siswa</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="siswa.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -49,14 +70,13 @@
                                 <!-- small box -->
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>44</h3>
-
-                                        <p>User Registrations</p>
+                                        <h3><?= $countKelas->jumlah ?></h3>
+                                        <p>Kelas</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="waliKelas.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -64,14 +84,13 @@
                                 <!-- small box -->
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>65</h3>
-
-                                        <p>Unique Visitors</p>
+                                        <h3><?= $countKasus->jumlah ?></h3>
+                                        <p>Data Kasus</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="kasus.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -92,15 +111,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">16697</td>
-                                            <td>Ahmad Farisul Haq</td>
-                                            <td>Telat Masuk</td>
-                                            <td class="text-center">-</td>
-                                            <!-- <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
+                                        <!-- ambil data siswa yang bermasalah -->
+                                        <?php
+                                        $sql = "SELECT * FROM trx_kasus INNER JOIN siswa USING(siswa_id) INNER JOIN kasus USING(kasus_id)";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->execute();
+                                        $siswaB = $stmt->fetchAll(PDO::FETCH_OBJ);
+                                        ?>
+                                        <!-- Tampilkan data -->
+                                        <?php $no = 1;
+                                        foreach ($siswaB as $siswa) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $no++ ?></td>
+                                                <td class="text-center"><?= $siswa->nis ?></td>
+                                                <td><?= $siswa->nama_siswa ?></td>
+                                                <td><?= $siswa->nama_kasus ?></td>
+                                                <td class="text-center"><?= $siswa->poin_kasus ?></td>
+                                                <!-- <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
                                                 <a href="delete.php?id=" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a> -->
-                                        </tr>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -113,7 +143,7 @@
         <?php include('../template/footer.inc') ?>
     </div>
     <!-- sweetAlert -->
-    <?php if ($_SESSION) : ?>
+    <?php if (isset($_SESSION['message'])) : ?>
         <script>
             Swal.fire({
                 icon: 'success',

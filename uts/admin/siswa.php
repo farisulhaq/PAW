@@ -1,3 +1,6 @@
+<?php 
+include($_SERVER["DOCUMENT_ROOT"] . '/php/paw/uts/config/connect.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Data Siswa" ?>
@@ -17,7 +20,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="card-body">
-                            <a href="" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i> Tambah</a>
+                            <a href="siswa/createSiswa.php" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i> Tambah</a>
                         </div>
                     </div>
                 </div>
@@ -39,19 +42,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">1000029293836</td>
-                                            <td>Ahmad Farisul Haq</td>
-                                            <td>Sumenep, 12 April 2002</td>
-                                            <td>Laki-Laki</td>
-                                            <td>081881735505</td>
-                                            <td class="text-center">
-                                                <a href="edit.php?id=" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
-                                                <a href="delete.php?id=" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a>
-                                            </td>
-                                            </td>
-                                        </tr>
+                                        <!-- ambil data siswa -->
+                                        <?php
+                                        $sql = "SELECT * FROM siswa NATURAL JOIN jenis_kelamin";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->execute();
+                                        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+                                        ?>
+                                        <?php if (empty($result)) : ?>
+                                            <tr>
+                                                <td colspan="7" class="text-center">Data Kosong</td>
+                                            </tr>
+                                        <?php else : ?>
+                                            <?php $no = 1;
+                                            foreach ($result as $row) : ?>
+                                                <tr>
+                                                    <td class="text-center"><?= $no++ ?></td>
+                                                    <td class="text-center"><?= $row->nis ?></td>
+                                                    <td><?= ucwords($row->nama_siswa) ?></td>
+                                                    <td><?= ucwords($row->ttl_siswa) ?></td>
+                                                    <td><?= ucwords($row->nama_jk) ?></td>
+                                                    <td><?= ucwords($row->nohp_siswa) ?></td>
+                                                    <td class="text-center">
+                                                        <a href="siswa/editSiswa.php?id=<?= $row->siswa_id ?>" style="color: #FFC107;"><i class="material-icons">&#xE254;</i></a>
+                                                        <a href="siswa/deleteSiswa.php?id=<?= $row->siswa_id ?>" style="color: #E34724;"><i class="material-icons">&#xE872;</i></a>
+                                                    </td>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -64,7 +83,7 @@
         <?php include('../template/footer.inc') ?>
     </div>
     <!-- sweetAlert -->
-    <?php if ($_SESSION) : ?>
+    <?php if (isset($_SESSION['message'])) : ?>
         <script>
             Swal.fire({
                 icon: 'success',
